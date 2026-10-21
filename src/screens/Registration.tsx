@@ -60,7 +60,7 @@ export function Registration({ step }: { step: number }) {
                             </div>
                         </div>
                         <div style={{ flex: 1, background: 'rgba(255,255,255,.12)', borderRadius: 16, padding: 12 }}>
-                            <b style={{ fontSize: 20 }}>[X]%</b>
+                            <b style={{ fontSize: 20 }}>3%</b>
                             <div className="tiny" style={{ color: '#DCE5FF' }}>
                                 кешбэк на детские категории
                             </div>
