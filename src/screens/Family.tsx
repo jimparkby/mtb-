@@ -64,6 +64,16 @@ export function Family({ initialTab }: { initialTab?: FamilyTab }) {
         flash(`Переведено ${money(amt)} BYN ${k.dat}`);
     };
 
+    const fresh = s.newGrades[kid];
+    const gradesSum = fresh.reduce((sum, g) => sum + (s.grades[g as 10 | 9 | 8] ?? 0), 0);
+    const payGrades = () => {
+        move('parent', -gradesSum, 'Награда за оценки', `${k.name} · ${fresh.join(', ')}`);
+        move(kid, gradesSum, 'Награда за оценки', 'из электронного дневника');
+        if (kid === 'kid') set((p) => ({ coins: p.coins + Math.round(gradesSum * 10) }));
+        set((p) => ({ newGrades: { ...p.newGrades, [kid]: [] } }));
+        flash(`За оценки переведено ${money(gradesSum)} BYN ${k.dat}`);
+    };
+
     return (
         <div className="scr">
             <div className="hero" style={{ paddingTop: 4 }}>
@@ -288,6 +298,17 @@ export function Family({ initialTab }: { initialTab?: FamilyTab }) {
                                         />
                                     </div>
                                 ))}
+                            {s.gradesOn && (
+                                <div className="stack" style={{ gap: 12, padding: '12px 16px 16px', borderTop: '1px solid var(--line)' }}>
+                                    <span>
+                                        <b>Новые оценки {k.gen}</b>
+                                        <div className="tiny">{fresh.length ? fresh.join(' · ') : 'новых оценок пока нет'}</div>
+                                    </span>
+                                    <button className="btn" disabled={gradesSum <= 0} onClick={payGrades}>
+                                        {gradesSum > 0 ? `Оплатить оценки · ${money(gradesSum)} BYN` : 'Оплатить оценки'}
+                                    </button>
+                                </div>
+                            )}
                         </Fold>
                     </>
                 )}

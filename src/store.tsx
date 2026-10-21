@@ -73,6 +73,8 @@ export interface State {
     tasks: Task[];
     grades: Record<10 | 9 | 8, number>;
     gradesOn: boolean;
+    /** Новые оценки из электронного дневника, ещё не оплаченные */
+    newGrades: Record<Child, number[]>;
     controls: Record<Child, Controls>;
     ops: Op[];
     request: boolean;
@@ -114,6 +116,7 @@ const initial = (): State => ({
     ],
     grades: { 10: 2, 9: 1, 8: 0.5 },
     gradesOn: true,
+    newGrades: { kid: [10, 9, 7, 10, 8], teen: [9, 8, 10, 6] },
     controls: { kid: controls(false), teen: controls(true) },
     ops: [
         { id: 'o1', who: 'kid', title: 'Онлайн-казино', sub: 'Отклонено · запрещено для детских карт', amt: -20, status: 'declined' },
