@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Карта ребёнка</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#16171C}
+a{color:#5B8CFF}a:hover{color:#8EB0FF}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #16171C; font-family: Inter, -apple-system, sans-serif; color: #FFFFFF; display: flex; flex-direction: column; padding: 52px 20px 24px; overflow: hidden; position: relative">
+  <div style="display: flex; align-items: center; gap: 4px">
+    <a href="Home.dc.html" aria-label="Назад" style="width: 44px; height: 44px; display: flex; align-items: center; color: #2B63F5; margin-left: -8px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <span style="font-size: 18px; font-weight: 600">Тимофей</span>
+  </div>
+
+  <div style="{{cardStyle}}">
+    <div style="display: flex; justify-content: space-between"><span style="font-size: 16px; font-weight: 800">MTbank</span><span style="font-size: 12px; font-weight: 600">{{status}}</span></div>
+    <div style="font-size: 30px; font-weight: 700">{{balText}}</div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end"><span style="font-size: 14px">Kids •• 0427 · цифровая</span>
+      <svg width="38" height="24" viewBox="0 0 44 28" aria-hidden="true"><circle cx="15" cy="14" r="13" fill="#EB001B"/><circle cx="29" cy="14" r="13" fill="#F79E1B" fill-opacity=".9"/></svg></div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 14px">
+    <button type="button" onClick="{{actChild}}" style="display: flex; flex-direction: column; align-items: center; gap: 6px; font: 12px Inter, sans-serif; color: #C8CAD3; background: transparent; border: 0; padding: 0; cursor: pointer">
+      <span style="width: 52px; height: 52px; border-radius: 16px; background: #24262F; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B63F5" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>Пополнить</button>
+    <a href="ParentTasks.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: #C8CAD3; text-decoration: none">
+      <span style="width: 52px; height: 52px; border-radius: 16px; background: #24262F; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B63F5" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Карманные</a>
+    <a href="ParentTasks.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: #C8CAD3; text-decoration: none">
+      <span style="width: 52px; height: 52px; border-radius: 16px; background: #24262F; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B63F5" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/></svg></span>Лимиты</a>
+    <button type="button" onClick="{{toggle}}" style="display: flex; flex-direction: column; align-items: center; gap: 6px; font: 12px Inter, sans-serif; color: #C8CAD3; background: transparent; border: 0; padding: 0; cursor: pointer">
+      <span style="{{lockBox}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>{{lockLabel}}</button>
+  </div>
+
+  <div style="background: #24262F; border-radius: 18px; padding: 14px 16px; margin-top: 16px">
+    <div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #C8CAD3">Потрачено сегодня</span><span style="font-weight: 600">12.40 из 20 BYN</span></div>
+    <div style="height: 8px; border-radius: 4px; background: #2E3039; margin-top: 10px; overflow: hidden"><div style="width: 62%; height: 100%; background: #2B63F5; border-radius: 4px"></div></div>
+    <div style="font-size: 12px; color: #9A9CA8; margin-top: 8px">Карманные: 25 BYN каждый понедельник</div>
+  </div>
+
+  <h2 style="margin: 18px 0 6px; font-size: 17px; font-weight: 700">Операции</h2>
+  <div style="display: flex; flex-direction: column">
+    <sc-for list="{{ops}}" as="o" hint-placeholder-count="4">
+      <div style="display: flex; align-items: center; gap: 12px; min-height: 56px; border-bottom: 1px solid #24262F">
+        <div style="width: 40px; height: 40px; border-radius: 12px; background: #24262F; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #7FA2FF">{{o.ic}}</div>
+        <div style="flex: 1"><div style="font-size: 15px; font-weight: 500">{{o.name}}</div><div style="font-size: 12px; color: #9A9CA8; margin-top: 2px">{{o.cat}}</div></div>
+        <div style="{{o.sumStyle}}">{{o.sum}}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ov}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 0; z-index: 40"><dc-import name="Action" kind="child" who="parent" on-close="{{closeOv}}" on-done="{{onDone}}" hint-size="390px,844px"></dc-import></div>
+  </sc-if>
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: absolute; left: 16px; right: 16px; top: 50px; z-index: 50; background: #2E3039; border-radius: 14px; padding: 12px 16px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,.45)">{{toast}}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { locked: false, ov: false, toast: '', bal: 58.95, extra: [] }; }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  flash(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this.tt);
+    this.tt = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+  renderVals() {
+    const s = this.state;
+    const l = s.locked;
+    const ops = [
+      ...s.extra,
+      { ic: 'Е', name: 'Евроопт', cat: 'Продукты · 14:20', sum: '−4.90', plus: false },
+      { ic: 'К', name: 'Kinopark', cat: 'Развлечения · вчера', sum: '−7.50', plus: false },
+      { ic: '+', name: 'Карманные от мамы', cat: 'Пополнение · пн', sum: '+25.00', plus: true },
+      { ic: '★', name: 'Награда за задание', cat: 'Финграмотность · пн', sum: '+3.00', plus: true }
+    ].slice(0, 4);
+    return {
+      status: l ? 'Заблокирована' : 'Активна',
+      balText: s.bal.toFixed(2) + ' BYN',
+      cardStyle: 'height: 180px; border-radius: 20px; padding: 18px; box-sizing: border-box; margin-top: 10px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(135deg, #2B63F5 0%, #0B2C9C 60%, #7A3CF0 100%); opacity: ' + (l ? '.45' : '1'),
+      toggle: () => { this.setState({ locked: !l }); this.flash(l ? 'Карта разблокирована' : 'Карта заблокирована. Тимофей получил уведомление'); },
+      lockLabel: l ? 'Разблок.' : 'Блок',
+      lockBox: 'width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: ' + (l ? '#FFFFFF' : '#FF6B76') + '; background: ' + (l ? '#E5323E' : '#24262F'),
+      actChild: () => this.setState({ ov: true }),
+      ov: s.ov,
+      closeOv: () => this.setState({ ov: false }),
+      // В шторке «child» сумма списывается с карты родителя (delta < 0) и приходит Тимофею
+      onDone: (delta, msg) => {
+        const amt = Math.abs(delta);
+        this.setState({ bal: Math.round((this.state.bal + amt) * 100) / 100, extra: [{ ic: '+', name: 'Пополнение от мамы', cat: 'Перевод · сейчас', sum: '+' + amt.toFixed(2), plus: true }, ...this.state.extra] });
+        this.flash(msg);
+      },
+      hasToast: !!s.toast,
+      toast: s.toast,
+      ops: ops.map((o) => ({ ...o, sumStyle: 'font-size: 15px; font-weight: 600; color: ' + (o.plus ? '#4CD47A' : '#FFFFFF') }))
+    };
+  }
+}
+</script>
+</body>
+</html>

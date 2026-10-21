@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Возраст ребёнка</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#16171C}
+a{color:#5B8CFF}a:hover{color:#8EB0FF}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #16171C; font-family: Inter, -apple-system, sans-serif; color: #FFFFFF; display: flex; flex-direction: column; padding: 52px 20px 34px">
+  <div style="display: flex; align-items: center; gap: 8px">
+    <a href="Main.dc.html" aria-label="Назад" style="width: 44px; height: 44px; display: flex; align-items: center; color: #2B63F5; margin-left: -8px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <span style="font-size: 15px; color: #9A9CA8">Шаг 1 из 4</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 4px">
+    <div style="height: 4px; border-radius: 2px; background: #2B63F5"></div>
+    <div style="height: 4px; border-radius: 2px; background: #2E3039"></div>
+    <div style="height: 4px; border-radius: 2px; background: #2E3039"></div>
+    <div style="height: 4px; border-radius: 2px; background: #2E3039"></div>
+  </div>
+
+  <h1 style="margin: 28px 0 8px; font-size: 26px; line-height: 1.2; font-weight: 700">Сколько лет ребёнку?</h1>
+  <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.45; color: #9A9CA8">От возраста зависит состав пакета и что ребёнок сможет делать сам</p>
+
+  <div style="display: flex; flex-direction: column; gap: 12px">
+    <sc-for list="{{options}}" as="o" hint-placeholder-count="2">
+      <button type="button" onClick="{{o.pick}}" style="{{o.box}}">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div style="font-size: 22px; font-weight: 700">{{o.range}}</div>
+          <div style="{{o.radio}}"></div>
+        </div>
+        <div style="font-size: 15px; font-weight: 600; margin-top: 2px">{{o.title}}</div>
+        <div style="font-size: 13px; line-height: 1.45; color: #9A9CA8; margin-top: 8px">{{o.text}}</div>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; background: #1E2A4A; border-radius: 14px; padding: 12px 14px">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FA2FF" stroke-width="1.8" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+    <div style="font-size: 13px; line-height: 1.45; color: #C9D6FF">Договор заключает родитель как законный представитель. С 14 лет ребёнок может распоряжаться своими доходами с вашего согласия.</div>
+  </div>
+
+  <a href="ChildData.dc.html" style="margin-top: auto; height: 54px; border-radius: 16px; background: #2B63F5; color: #FFFFFF; font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; text-decoration: none">Продолжить</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { picked: 'kid' }; }
+  renderVals() {
+    const data = [
+      { id: 'kid', range: '7–13 лет', title: 'Детский пакет', text: 'Карта с лимитами, карманные деньги, копилка и задания. Все операции видит родитель.' },
+      { id: 'teen', range: '14–17 лет', title: 'Подростковый пакет', text: 'Больше свободы: онлайн-покупки, переводы друзьям, накопительный счёт. Лимиты задаёте вы.' }
+    ];
+    return {
+      options: data.map((o) => {
+        const on = this.state.picked === o.id;
+        return {
+          ...o,
+          pick: () => this.setState({ picked: o.id }),
+          box: 'text-align: left; font-family: inherit; color: #FFFFFF; cursor: pointer; background: ' + (on ? '#1E2A4A' : '#24262F') + '; border: 2px solid ' + (on ? '#2B63F5' : 'transparent') + '; border-radius: 18px; padding: 16px; width: 100%',
+          radio: 'width: 22px; height: 22px; border-radius: 50%; box-sizing: border-box; border: ' + (on ? '7px solid #2B63F5' : '2px solid #4A4D5A')
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

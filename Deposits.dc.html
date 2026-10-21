@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Вклады и цели семьи</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#16171C}
+a{color:#5B8CFF}a:hover{color:#8EB0FF}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #16171C; font-family: Inter, -apple-system, sans-serif; color: #FFFFFF; display: flex; flex-direction: column; padding: 52px 20px 34px; position: relative; overflow: hidden">
+  <div style="display: flex; align-items: center; gap: 4px">
+    <a href="Home.dc.html" aria-label="Назад" style="width: 44px; height: 44px; display: flex; align-items: center; color: #2B63F5; margin-left: -8px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <span style="font-size: 18px; font-weight: 600">Вклады и цели</span>
+  </div>
+
+  <div style="font-size: 13px; color: #9A9CA8; margin-top: 10px">Всего в сбережениях</div>
+  <div style="font-size: 32px; font-weight: 700; margin-top: 2px">3 420.00 BYN</div>
+  <div style="font-size: 13px; color: #4CD47A; margin-top: 4px">+ 41.20 BYN доход за месяц</div>
+
+  <div style="display: flex; gap: 8px; margin-top: 16px">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+      <button type="button" onClick="{{t.pick}}" style="{{t.s}}">{{t.label}}</button>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{showDeposits}}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px">
+      <div style="background: linear-gradient(135deg, #2B63F5 0%, #0B2C9C 100%); border-radius: 20px; padding: 18px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="font-size: 15px; font-weight: 600">Семейный вклад</span>
+          <span style="font-size: 12px; font-weight: 600; background: rgba(255,255,255,.2); padding: 4px 10px; border-radius: 10px">[X]% годовых</span>
+        </div>
+        <div style="font-size: 26px; font-weight: 700; margin-top: 10px">3 000.00 BYN</div>
+        <div style="font-size: 13px; color: #DCE5FF; margin-top: 4px">Ставка выше на [X]% для участников «Семьи в Moby»</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; background: #24262F; border-radius: 18px; padding: 14px">
+        <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px dashed #3A3D4A; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B63F5" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M7 8c0-2 2-3 5-3s5 1 5 3-2 3-5 4-5 2-5 4 2 3 5 3 5-1 5-3"/></svg>
+        </div>
+        <div style="flex: 1"><div style="font-size: 15px; font-weight: 600">Накопительный счёт ребёнка</div><div style="font-size: 12px; color: #9A9CA8; margin-top: 2px">На образование · снятие с вашего согласия</div></div>
+        <div style="font-size: 15px; font-weight: 700">420.00</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{showGoals}}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px">
+      <sc-for list="{{goals}}" as="g" hint-placeholder-count="2">
+        <div style="background: #24262F; border-radius: 18px; padding: 16px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <span style="font-size: 15px; font-weight: 600">{{g.name}}</span>
+            <span style="font-size: 13px; color: #9A9CA8">{{g.who}}</span>
+          </div>
+          <div style="font-size: 20px; font-weight: 700; margin-top: 8px">{{g.have}} <span style="font-size: 14px; font-weight: 500; color: #9A9CA8">из {{g.target}} BYN</span></div>
+          <div style="height: 8px; border-radius: 4px; background: #2E3039; margin-top: 10px; overflow: hidden"><div style="{{g.bar}}"></div></div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px">
+    <button type="button" onClick="{{openCta}}" style="height: 54px; border-radius: 16px; border: 0; background: #2B63F5; color: #FFFFFF; font: 600 16px Inter, sans-serif; cursor: pointer">{{cta}}</button>
+  </div>
+
+  <sc-if value="{{ov}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 0; z-index: 40"><dc-import name="Action" kind="{{ovKind}}" who="parent" on-close="{{closeOv}}" on-done="{{onDone}}" hint-size="390px,844px"></dc-import></div>
+  </sc-if>
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: absolute; left: 16px; right: 16px; top: 50px; z-index: 50; background: #2E3039; border-radius: 14px; padding: 12px 16px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,.45)">{{toast}}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 'dep', ov: false, toast: '' }; }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  renderVals() {
+    const t = this.state.tab;
+    const goals = [
+      { name: 'Велосипед', who: 'Тимофей', have: '86.00', target: 450, p: 19 },
+      { name: 'Лагерь летом', who: 'Семейная', have: '310.00', target: 600, p: 52 }
+    ];
+    return {
+      showDeposits: t === 'dep',
+      showGoals: t === 'goal',
+      cta: t === 'dep' ? 'Открыть вклад' : 'Новая цель',
+      ov: this.state.ov,
+      ovKind: t === 'dep' ? 'deposit' : 'goal',
+      openCta: () => this.setState({ ov: true }),
+      closeOv: () => this.setState({ ov: false }),
+      onDone: (delta, msg) => { this.setState({ toast: msg }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 2600); },
+      hasToast: !!this.state.toast,
+      toast: this.state.toast,
+      tabs: [{ id: 'dep', label: 'Вклады' }, { id: 'goal', label: 'Цели' }].map((x) => ({
+        ...x,
+        pick: () => this.setState({ tab: x.id }),
+        s: 'height: 40px; padding: 0 18px; border-radius: 20px; border: 0; cursor: pointer; font: 600 14px Inter, sans-serif; color: ' + (t === x.id ? '#FFFFFF' : '#C8CAD3') + '; background: ' + (t === x.id ? '#2B63F5' : '#24262F')
+      })),
+      goals: goals.map((g) => ({ ...g, bar: 'height: 100%; border-radius: 4px; background: #2B63F5; width: ' + g.p + '%' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

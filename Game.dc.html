@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Игра Moby</title>
+<style>html,body{margin:0;height:100%;background:#0B0C10;color:#9A9CA8;font:500 15px Inter,system-ui,sans-serif;display:flex;align-items:center;justify-content:center}</style>
+</head>
+<body>
+Открываем игру…
+<script>
+// Игра из репозитория mt-city собрана в папку game/.
+// 7–13 лет — отдельная игра (game.html), 14–17 — полное демо Moby с ролью подростка.
+(function () {
+    var teen = location.hash === '#teen' || /TeenHome/.test(document.referrer);
+    if (teen) {
+        try {
+            var key = 'mt-city:ui:v7';
+            var saved = JSON.parse(localStorage.getItem(key) || '{}');
+            saved.role = 'teen';
+            saved.bankTab = 'city';
+            localStorage.setItem(key, JSON.stringify(saved));
+        } catch (e) {}
+        location.replace('game/index.html');
+    } else {
+        location.replace('game/game.html');
+    }
+})();
+</script>
+</body>
+</html>

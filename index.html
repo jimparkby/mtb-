@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Семья в Moby — прототип</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0C10;--card:#1E1F25;--line:#2E3039;--text:#FFFFFF;--muted:#9A9CA8;--accent:#2B63F5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:40px 16px 64px}
+h1{margin:0;font-size:32px;font-weight:800;letter-spacing:-.5px}
+.lead{margin:8px 0 28px;color:var(--muted);font-size:16px;line-height:1.5}
+.start{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;border-radius:16px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;margin-right:10px;margin-bottom:10px}
+.start.alt{background:var(--card)}
+h2{margin:36px 0 12px;font-size:18px;color:var(--muted);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.grid a{display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:16px;background:var(--card);color:var(--text);text-decoration:none;border:1px solid transparent}
+.grid a:hover,.grid a:focus-visible{border-color:var(--accent);outline:none}
+.grid b{font-size:15px}
+.grid span{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Семья в Moby</h1>
+  <p class="lead">Кликабельный прототип детско-семейного банкинга для хакатона МТБанка: регистрация родителя, карты, задания, копилка, вклады и игра Moby.</p>
+  <a class="start" href="Main.dc.html">Начать с регистрации родителя →</a>
+  <a class="start alt" href="Home.dc.html">Главная родителя</a>
+  <a class="start alt" href="KidHome.dc.html">Приложение 7–13</a>
+  <a class="start alt" href="TeenHome.dc.html">Приложение 14–17</a>
+
+  <h2>Регистрация: родитель оформляет пакет</h2>
+  <div class="grid">
+    <a href="Main.dc.html"><b>1. Точка входа</b><span>Что получит семья, свайп-согласие</span></a>
+    <a href="Age.dc.html"><b>2. Возраст ребёнка</b><span>7–13 или 14–17 лет</span></a>
+    <a href="ChildData.dc.html"><b>3. Данные ребёнка</b><span>Свидетельство и телефон</span></a>
+    <a href="Limits.dc.html"><b>4. Права и согласия</b><span>Что можно ребёнку</span></a>
+    <a href="CardDesign.dc.html"><b>5. Цифровая карта</b><span>Дизайн и свайп-договор</span></a>
+    <a href="Done.dc.html"><b>6. Готово</b><span>Доступ ребёнку в Moby</span></a>
+  </div>
+
+  <h2>Родитель</h2>
+  <div class="grid">
+    <a href="Home.dc.html"><b>Главная родителя</b><span>Истории, семья, переводы, чат</span></a>
+    <a href="ParentTasks.dc.html"><b>Кабинет семьи</b><span>Задания, контроль, операции</span></a>
+    <a href="ChildCard.dc.html"><b>Карта ребёнка</b><span>Пополнение, блокировка</span></a>
+    <a href="Deposits.dc.html"><b>Вклады и цели</b><span>Семейный вклад, цели</span></a>
+    <a href="Story.dc.html"><b>История</b><span>Сторис о пакете</span></a>
+  </div>
+
+  <h2>Ребёнок и подросток</h2>
+  <div class="grid">
+    <a href="KidHome.dc.html"><b>Приложение 7–13</b><span>MTcoin, задания от мамы</span></a>
+    <a href="TeenHome.dc.html"><b>Приложение 14–17</b><span>Кешбэк по уровням карты</span></a>
+    <a href="Kopilka.dc.html"><b>Копилка</b><span>Разные правила по возрасту</span></a>
+    <a href="Game.dc.html"><b>Игра Moby — 7–13</b><span>Город, квесты, мини-игры</span></a>
+    <a href="Game.dc.html#teen"><b>Игра Moby — 14–17</b><span>Полное демо с ролью подростка</span></a>
+  </div>
+
+  <h2>Общие компоненты</h2>
+  <div class="grid">
+    <a href="Action.dc.html"><b>Шторка действия</b><span>Пополнить, перевести, оплатить</span></a>
+    <a href="Menu.dc.html"><b>Меню</b><span>Продукты, ещё, договор</span></a>
+    <a href="Chat.dc.html"><b>Чат с Moby</b><span>Ответы помощника</span></a>
+  </div>
+</main>
+</body>
+</html>
