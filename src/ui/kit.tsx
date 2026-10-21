@@ -208,7 +208,7 @@ export function Done({ title, amount, rows, children }: { title: string; amount?
 }
 
 /** Нижнее меню Moby: у родителя «Moby» ведёт в кабинет семьи, у ребёнка — в игру */
-export function TabBar({ active }: { active: 'home' | 'moby' }) {
+export function TabBar({ active }: { active: 'home' | 'products' | 'moby' }) {
     const { s, nav } = useStore();
     const parent = s.role === 'parent';
     const review = s.tasks.filter((t) => t.st === 'review').length;
@@ -218,8 +218,8 @@ export function TabBar({ active }: { active: 'home' | 'moby' }) {
                 <HouseIcon size={24} weight={active === 'home' ? 'fill' : 'regular'} />
                 Главная
             </button>
-            <button onClick={() => nav.sheet({ kind: 'products' })}>
-                <CardsIcon size={24} />
+            <button aria-current={active === 'products' ? 'page' : undefined} onClick={() => nav.tab({ id: 'products' })}>
+                <CardsIcon size={24} weight={active === 'products' ? 'fill' : 'regular'} />
                 Продукты
             </button>
             <button

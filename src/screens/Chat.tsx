@@ -22,7 +22,10 @@ export function Chat() {
     const end = useRef<HTMLDivElement>(null);
     const t = useRef<ReturnType<typeof setTimeout>>(undefined);
     useEffect(() => () => clearTimeout(t.current), []);
-    useEffect(() => end.current?.scrollIntoView({ behavior: 'smooth' }), [msgs]);
+    // В фигурных скобках: scrollIntoView в новых браузерах возвращает Promise, а React ждёт от эффекта только функцию
+    useEffect(() => {
+        end.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [msgs]);
 
     const send = (text: string) => {
         const v = text.trim();

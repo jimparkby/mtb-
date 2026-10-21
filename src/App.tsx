@@ -4,6 +4,7 @@ import { useStore, type Role } from './store';
 import { ParentHome } from './screens/ParentHome';
 import { KidHome, TeenHome } from './screens/ChildHome';
 import { Registration } from './screens/Registration';
+import { Products } from './screens/Products';
 import { Story } from './screens/Story';
 import { ChildCard } from './screens/ChildCard';
 import { Deposits } from './screens/Deposits';
@@ -104,6 +105,8 @@ function Route() {
     switch (sc.id) {
         case 'home':
             return s.role === 'parent' ? <ParentHome /> : s.role === 'kid' ? <KidHome /> : <TeenHome />;
+        case 'products':
+            return <Products />;
         case 'reg':
             return <Registration step={sc.step} />;
         case 'story':

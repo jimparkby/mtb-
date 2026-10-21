@@ -277,8 +277,18 @@ input::placeholder {
     display: none;
 }
 
-.scr.with-tabs {
-    padding-bottom: 96px;
+/* Горизонтальные ленты (истории, карты, подсказки) листаются без системной полосы прокрутки */
+.phone * {
+    scrollbar-width: none;
+}
+
+.phone *::-webkit-scrollbar {
+    display: none;
+}
+
+/* Отступ между контентом и нижним меню */
+.scr.with-tabs > :nth-last-child(2) {
+    margin-bottom: 16px;
 }
 
 .pad {
@@ -648,12 +658,14 @@ input::placeholder {
     border-radius: 12px;
     font-weight: 700;
     font-size: 14px;
-    border: 1.5px solid transparent;
+    text-align: center;
+    color: var(--muted-2);
+    transition: background 0.2s;
 }
 
 .tabs button[aria-pressed='true'] {
     background: var(--accent);
-    border-color: #fff;
+    color: #fff;
 }
 
 /* Переключатель */
@@ -850,12 +862,12 @@ input::placeholder {
     font-weight: 700;
 }
 
-/* Нижнее меню Moby */
+/* Нижнее меню Moby: последний элемент .scr, прилипает к низу и не уезжает при прокрутке */
 .tabbar {
-    position: absolute;
-    left: 0;
-    right: 0;
+    position: sticky;
     bottom: 0;
+    margin-top: auto;
+    flex: none;
     height: 88px;
     background: var(--sheet);
     border-radius: 30px 30px 0 0;

@@ -6,6 +6,7 @@ export type Child = 'kid' | 'teen';
 
 export type Screen =
     | { id: 'home' }
+    | { id: 'products' }
     | { id: 'reg'; step: number }
     | { id: 'story' }
     | { id: 'childCard'; child: Child }
@@ -23,7 +24,6 @@ export type FamilyTab = 'tasks' | 'control' | 'ops';
 export type Sheet =
     | { kind: 'ask' }
     | { kind: 'reply' }
-    | { kind: 'products' }
     | { kind: 'more' }
     | { kind: 'teenTasks' }
     | { kind: 'doc'; title: string }
@@ -177,6 +177,8 @@ function useStoreValue() {
                     return { sheet: null, stacks: { ...p.stacks, [p.role]: st.length > 1 ? st.slice(0, -1) : st } };
                 }),
             home: () => set((p) => ({ sheet: null, stacks: { ...p.stacks, [p.role]: [{ id: 'home' }] } })),
+            /** Вкладка нижнего меню: экран сразу над главной, без накопления истории */
+            tab: (screen: Screen) => set((p) => ({ sheet: null, stacks: { ...p.stacks, [p.role]: [{ id: 'home' }, screen] } })),
             role: (role: Role) => set(() => ({ role, sheet: null })),
             sheet: (sheet: Sheet | null) => set(() => ({ sheet })),
         }),

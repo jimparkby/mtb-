@@ -122,7 +122,7 @@ export function ParentHome() {
                                 </b>
                                 <span className="sub">
                                     {KIDS[c].card} {KIDS[c].mask}
-                                    {s.controls[c].blocked ? ' · заблокирована' : ` · лимит ${s.controls[c].day} BYN/день`}
+                                    {s.controls[c].blocked ? ' · заблокирована' : ` · лимит ${s.controls[c].day} BYN/⁠день`}
                                 </span>
                             </span>
                             <b>{money(s.bal[c])}</b>

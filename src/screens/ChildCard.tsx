@@ -94,8 +94,8 @@ export function ChildCard({ child }: { child: Child }) {
             <div className="list" style={{ margin: '0 20px 24px' }}>
                 {ops.map((o) => (
                     <div key={o.id} className="li">
-                        <span className="tile" style={{ color: o.status === 'declined' ? '#FF6B9A' : o.amt > 0 ? 'var(--green)' : undefined }}>
-                            {o.amt > 0 ? '+' : o.title[0]}
+                        <span className="tile" style={{ color: o.status === 'declined' ? '#FF6B9A' : o.amt > 0 ? 'var(--green)' : undefined, background: o.status === 'declined' ? '#3A1A2A' : undefined }}>
+                            {o.status === 'declined' ? '✕' : o.amt > 0 ? '+' : o.title[0]}
                         </span>
                         <span className="grow">
                             <b>{o.title}</b>

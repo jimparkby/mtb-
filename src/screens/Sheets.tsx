@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BankIcon, BuildingsIcon, CaretDownIcon, CaretRightIcon, CheckSquareIcon, CreditCardIcon, PiggyBankIcon, PlusIcon, SparkleIcon, type Icon } from '@phosphor-icons/react';
+import { BuildingsIcon, CaretDownIcon, CaretRightIcon, CheckSquareIcon, CreditCardIcon, SparkleIcon, type Icon } from '@phosphor-icons/react';
 import { money, useStore, type Screen } from '../store';
 import { Sheet, Stepper } from '../ui/kit';
 
@@ -12,9 +12,8 @@ export function Sheets() {
             return <Ask />;
         case 'reply':
             return <Reply />;
-        case 'products':
         case 'more':
-            return <Menu kind={s.sheet.kind} />;
+            return <More />;
         case 'teenTasks':
             return <TeenTasks />;
         case 'doc':
@@ -106,34 +105,21 @@ function Reply() {
     );
 }
 
-function Menu({ kind }: { kind: 'products' | 'more' }) {
+function More() {
     const { s, nav } = useStore();
     const [safety, setSafety] = useState(false);
     const row = (label: string, sub: string, screen: Screen, Ico: Icon) => ({ label, sub, screen, Ico });
     const rows =
         s.role === 'parent'
-            ? kind === 'products'
-                ? [
-                      row('Карта Тимофея', `Moby Kids · ${money(s.bal.kid)} BYN`, { id: 'childCard', child: 'kid' }, CreditCardIcon),
-                      row('Карта Марка', `Moby Teen · ${money(s.bal.teen)} BYN`, { id: 'childCard', child: 'teen' }, CreditCardIcon),
-                      row('Вклады и цели', `Семейный вклад · ${money(s.deposit)} BYN`, { id: 'deposits' }, BankIcon),
-                      row('Семья в Moby', 'Оформить пакет ещё одному ребёнку', { id: 'reg', step: 1 }, PlusIcon),
-                  ]
-                : [
-                      row('Кабинет семьи', 'Задания, контроль, операции', { id: 'family' }, CheckSquareIcon),
-                      row('Истории', 'Что нового в Moby', { id: 'story' }, SparkleIcon),
-                      row('Платежи', 'Связь, коммунальные, ЕРИП', { id: 'pay' }, CreditCardIcon),
-                  ]
-            : kind === 'products'
-              ? [
-                    row(s.role === 'kid' ? `Копилка «${s.kop.kid.goal}»` : 'Копилка', `${money(s.kop[s.role].saved)} BYN · 8% годовых`, { id: 'kopilka' }, PiggyBankIcon),
-                    ...(s.role === 'teen' ? [row('Вклады в BYN', 'С 14 лет открываешь сам', { id: 'deposits' }, BankIcon)] : []),
-                    row('Игра Moby', 'Город, квесты и задания', { id: 'game' }, BuildingsIcon),
-                ]
-              : [row('Игра Moby', 'Квесты недели', { id: 'game' }, BuildingsIcon), row('Платежи', 'Связь, проезд, школа', { id: 'pay' }, CreditCardIcon)];
+            ? [
+                  row('Кабинет семьи', 'Задания, контроль, операции', { id: 'family' }, CheckSquareIcon),
+                  row('Истории', 'Что нового в Moby', { id: 'story' }, SparkleIcon),
+                  row('Платежи', 'Связь, коммунальные, ЕРИП', { id: 'pay' }, CreditCardIcon),
+              ]
+            : [row('Игра Moby', 'Квесты недели', { id: 'game' }, BuildingsIcon), row('Платежи', 'Связь, проезд, школа', { id: 'pay' }, CreditCardIcon)];
 
     return (
-        <Sheet title={kind === 'products' ? 'Продукты' : 'Ещё'}>
+        <Sheet title="Ещё">
             <div className="list">
                 {rows.map((r) => (
                     <button key={r.label} className="li" onClick={() => nav.go(r.screen)}>
@@ -148,7 +134,7 @@ function Menu({ kind }: { kind: 'products' | 'more' }) {
                     </button>
                 ))}
             </div>
-            {kind === 'more' && (
+            {(
                 <div className="fold" data-open={safety}>
                     <button className="fold-head" aria-expanded={safety} onClick={() => setSafety(!safety)}>
                         <span className="grow" style={{ fontWeight: 700 }}>
